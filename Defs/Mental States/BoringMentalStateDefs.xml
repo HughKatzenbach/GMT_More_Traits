@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+  <MentalStateDef ParentName="BaseMentalState">
+    <minTicksBeforeRecovery>600</minTicksBeforeRecovery>
+    <maxTicksBeforeRecovery>1800</maxTicksBeforeRecovery>
+    <recoveryMtbDays>0.02</recoveryMtbDays>
+    <defName>GMT_BoredToSleep</defName>
+    <stateClass>Garthor_More_Traits.GMT_MentalState_BoredToSleep</stateClass>
+    <workerClass>Garthor_More_Traits.GMT_MentalStateWorker_BoredToSleep</workerClass>
+    <label>bored to sleep</label>
+    <category>Misc</category>
+    <nameColor>(0.65, 0.9, 0.93)</nameColor>
+    <baseInspectLine>Mental state: Bored to sleep</baseInspectLine>
+    <blockNormalThoughts>true</blockNormalThoughts>
+    <recoverFromSleep>false</recoverFromSleep>
+    <unspawnedCanDo>false</unspawnedCanDo>
+    <allowBeatfire>false</allowBeatfire>
+  </MentalStateDef>
+  
+  <HediffDef>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defName>GMT_Hediff_Bored</defName>
+    <label>boredom</label>
+    <labelNoun>boredom</labelNoun>
+    <description>Listening to a boring person drone on and on is taking a mental toll.</description>
+    <defaultLabelColor>(0,0.5,0.5)</defaultLabelColor>
+    <isBad>false</isBad>
+    <maxSeverity>1.0</maxSeverity>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-2.5</severityPerDay>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <minSeverity>0</minSeverity>
+        <label>a bit bored</label>
+        <becomeVisible>false</becomeVisible>
+      </li>
+      <li>
+        <minSeverity>0.2</minSeverity>
+        <label>somewhat bored</label>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <postFactor>0.98</postFactor>
+          </li>
+        </capMods>
+        <mentalStateGivers>
+          <li>
+            <mentalState>GMT_BoredToSleep</mentalState>
+            <mtbDays>0.6</mtbDays>
+          </li>
+        </mentalStateGivers>
+      </li>
+      <li>
+        <minSeverity>0.4</minSeverity>
+        <label>bored</label>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <postFactor>0.95</postFactor>
+          </li>
+        </capMods>
+        <mentalStateGivers>
+          <li>
+            <mentalState>GMT_BoredToSleep</mentalState>
+            <mtbDays>0.4</mtbDays>
+          </li>
+        </mentalStateGivers>
+      </li>
+      <li>
+        <minSeverity>0.6</minSeverity>
+        <label>very bored</label>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <postFactor>0.90</postFactor>
+          </li>
+        </capMods>
+        <mentalStateGivers>
+          <li>
+            <mentalState>GMT_BoredToSleep</mentalState>
+            <mtbDays>0.2</mtbDays>
+          </li>
+        </mentalStateGivers>
+      </li>
+      <li>
+        <minSeverity>0.8</minSeverity>
+        <label>bored to death</label>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <postFactor>0.9</postFactor>
+          <offset>-0.10</offset>
+          </li>
+        </capMods>
+        <mentalStateGivers>
+          <li>
+            <mentalState>GMT_BoredToSleep</mentalState>
+            <mtbDays>0.05</mtbDays>
+          </li>
+        </mentalStateGivers>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <ThinkTreeDef>
+    <defName>BoringMentalStateDefs</defName>
+    <insertTag>Humanlike_PostMentalState</insertTag>
+    <insertPriority>69</insertPriority>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="ThinkNode_ConditionalMentalState">
+          <state>GMT_BoredToSleep</state>
+          <subNodes>
+            <li Class="JobGiver_ForceSleepNow" />
+          </subNodes>
+        </li>
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+</Defs>

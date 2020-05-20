@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <ThoughtDef>
+    <defName>GMT_Animal_Friend_Hurt_Animal</defName>
+    <durationDays>2</durationDays>
+    <stackLimit>10</stackLimit>
+    <stackedEffectMultiplier>1.2</stackedEffectMultiplier>
+    <requiredTraits>
+      <li>GMT_Animal_Friend</li>
+    </requiredTraits>
+    <stages>
+      <li>
+        <label>harmed an animal</label>
+        <description>Oh no! What have I done!</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>

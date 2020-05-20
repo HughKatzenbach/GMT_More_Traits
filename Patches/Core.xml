@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Patch>
+  <Operation Class="PatchOperationSequence">
+    <operations>
+      <!-- Add Violent to the disablingWorkTags for Shooting, if not present -->
+      <li Class="PatchOperationSequence">
+        <success>Always</success>
+        <operations>
+          <li Class="PatchOperationTest">
+            <xpath>/Defs/SkillDef[defName = "Shooting"]/disablingWorkTags</xpath>
+            <success>Invert</success>
+          </li>
+          <li Class="PatchOperationAdd">
+            <xpath>/Defs/SkillDef[defName = "Shooting"]</xpath>
+            <value>
+                <disablingWorkTags>Violent</disablingWorkTags>
+            </value>
+          </li>
+        </operations>
+      </li>
+      
+      <!-- Add the Drunken Master StatPart to the melee dodge chance stat -->
+      <li Class="PatchOperationConditional">
+        <xpath>/Defs/StatDef[defName = "MeleeDodgeChance"]/parts</xpath>
+        <match Class="PatchOperationAdd">
+          <xpath>/Defs/StatDef[defName = "MeleeDodgeChance"]/parts</xpath>
+          <value>
+            <li Class="Garthor_More_Traits.GMT_StatPart_Drunken_Master">
+              <curve>
+                <points>
+                  <li>(0, 10)</li>
+                  <li>(1, 20)</li>
+                  <li>(2, 40)</li>
+                  <li>(3, 60)</li>
+                  <li>(4, 0 )</li>
+                </points>
+              </curve>
+            </li>
+          </value>
+        </match>
+        <!-- There are no parts attached to melee dodge in vanilla, so we need to add the parts node if it isn't present -->
+        <nomatch Class="PatchOperationAdd">
+          <xpath>/Defs/StatDef[defName = "MeleeDodgeChance"]</xpath>
+          <value>
+            <parts>
+              <li Class="Garthor_More_Traits.GMT_StatPart_Drunken_Master">
+                <curve>
+                  <points>
+                    <li>(0, 10)</li>
+                    <li>(1, 20)</li>
+                    <li>(2, 40)</li>
+                    <li>(3, 60)</li>
+                    <li>(4,  0)</li>
+                  </points>
+                </curve>
+              </li>
+            </parts>
+          </value>
+        </nomatch>
+      </li>
+      
+      <!-- Add the Drunken Master StatPart to the melee hit chance stat -->
+      <li Class="PatchOperationConditional">
+        <xpath>/Defs/StatDef[defName = "MeleeHitChance"]/parts</xpath>
+        <match Class="PatchOperationAdd">
+          <xpath>/Defs/StatDef[defName = "MeleeHitChance"]/parts</xpath>
+          <value>
+            <li Class="Garthor_More_Traits.GMT_StatPart_Drunken_Master">
+              <curve>
+                <points>
+                  <li>(0,  1)</li>
+                  <li>(1,  3)</li>
+                  <li>(2,  7)</li>
+                  <li>(3, 12)</li>
+                  <li>(4,  0)</li>
+                </points>
+              </curve>
+            </li>
+          </value>
+        </match>
+        <!-- There are no parts attached to melee hit in vanilla, so we need to add the parts node if it isn't present -->
+        <nomatch Class="PatchOperationAdd">
+          <xpath>/Defs/StatDef[defName = "MeleeHitChance"]</xpath>
+          <value>
+            <parts>
+              <li Class="Garthor_More_Traits.GMT_StatPart_Drunken_Master">
+                <curve>
+                  <points>
+                    <li>(0,  1)</li>
+                    <li>(1,  3)</li>
+                    <li>(2,  7)</li>
+                    <li>(3, 12)</li>
+                    <li>(4,  0)</li>
+                  </points>
+                </curve>
+              </li>
+            </parts>
+          </value>
+        </nomatch>
+      </li>
+    </operations>
+  </Operation>
+  
+  <Operation Class="PatchOperationAttributeAdd">
+    <xpath>Defs/InteractionDef[defName="Insult"]</xpath>
+    <attribute>Name</attribute>
+    <value>Insult</value>
+  </Operation>
+</Patch>

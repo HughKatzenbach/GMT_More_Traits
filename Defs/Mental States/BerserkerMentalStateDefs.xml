@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+  <MentalStateDef ParentName="BaseMentalState">
+    <defName>GMT_MentalState_Berserking</defName>
+    <stateClass>Garthor_More_Traits.GMT_MentalState_Berserking</stateClass>
+    <workerClass>Garthor_More_Traits.GMT_MentalStateWorker_Berserking</workerClass>
+    <label>BERSERKING</label>
+    <category>Misc</category>
+    <nameColor>(1.0,0.1,0.1)</nameColor>
+    <baseInspectLine>Mental state: Berserker Rage</baseInspectLine>
+    <stateEffecter>Berserk</stateEffecter> <!-- Adds berserk particle effects -->
+    <blockNormalThoughts>false</blockNormalThoughts>
+    <recoverFromSleep>true</recoverFromSleep>
+    <unspawnedCanDo>false</unspawnedCanDo>
+    <allowBeatfire>false</allowBeatfire>
+    <beginLetter>{0} has gone into a Berserker rage.\n\n[PAWN_pronoun] will attack any enemies [PAWN_pronoun] sees.</beginLetter>
+    <recoveryMessage>{0}'s Berserker rage has come to an end.</recoveryMessage>
+    <blockInteractionInitiationExcept>
+      <li>Insult</li>
+      <li>GMT_Interaction_InsultEnemy</li>
+    </blockInteractionInitiationExcept>
+    <blockInteractionRecipientExcept>
+      <li>Insult</li>
+      <li>GMT_Interaction_InsultEnemy</li>
+    </blockInteractionRecipientExcept>
+    <blockRandomInteraction>true</blockRandomInteraction>
+  </MentalStateDef>
+  
+  <HediffDef>
+    <hediffClass>Garthor_More_Traits.GMT_Hediff_Berserker_Ire</hediffClass>
+    <defName>GMT_Hediff_Berserker_Ire</defName>
+    <label>Berserker Ire</label>
+    <labelNoun>berserker ire</labelNoun>
+    <description>This person is getting angry. You won't like them when they're angry.</description>
+    <defaultLabelColor>(0.8,0.2,0.2)</defaultLabelColor>
+    <isBad>false</isBad>
+    <maxSeverity>1.0</maxSeverity>
+    <minSeverity>0.01</minSeverity>
+    <initialSeverity>0.01</initialSeverity>
+    <comps>
+      <!-- Empty -->
+    </comps>
+    <stages>
+      <li>
+        <label>Angry</label>
+        <becomeVisible>false</becomeVisible>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <HediffDef>
+    <hediffClass>Garthor_More_Traits.GMT_Hediff_Berserker_Rage</hediffClass>
+    <defName>GMT_Hediff_Berserker_Rage</defName>
+    <label>Berserker Rage</label>
+    <labelNoun>a berserker rage</labelNoun>
+    <description>This person has flown into a berserk rage. They are significantly more capable in combat, but will be uncontrollable until they calm down.</description>
+    <defaultLabelColor>(1.0,0.1,0.1)</defaultLabelColor>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <label>BERSERK</label>
+        <painFactor>0.5</painFactor>
+        <capMods>
+          <li>
+            <capacity>BloodPumping</capacity>
+            <offset>1.0</offset>
+          </li>
+          <li>
+            <capacity>Breathing</capacity>
+            <offset>0.5</offset>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>0.25</offset>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>0.5</offset>
+          </li>
+          <li>
+            <capacity>Sight</capacity>
+            <offset>0.5</offset>
+          </li>
+          <!-- Frothing at the mouth -->
+          <li>
+            <capacity>Talking</capacity>
+            <postFactor>0.25</postFactor>
+          </li>
+        </capMods>
+        <statFactors>
+          <IncomingDamageFactor>0.5</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+  
+  <ThinkTreeDef>
+    <defName>GMT_ThinkTree_Berserking</defName>
+    <insertTag>Humanlike_PostMentalState</insertTag>
+    <insertPriority>69</insertPriority>
+    <thinkRoot Class="ThinkNode_ConditionalMentalState">
+      <state>GMT_MentalState_Berserking</state>
+      <subNodes>
+        <li Class="ThinkNode_Priority">
+          <subNodes>
+            <!-- Need to pick up a weapon if we recovered from a downed state by going berserk, or lost it for some other reason -->
+            <!-- Default JobGiver won't work, need one that just picks up a melee weapon -->
+            <!-- <li Class="JobGiver_PickUpOpportunisticWeapon" /> -->
+            <li Class="JobGiver_AIFightEnemies">
+              <targetAcquireRadius>30</targetAcquireRadius>
+              <targetKeepRadius>40</targetKeepRadius>
+            </li>
+            <li Class="Garthor_More_Traits.GMT_JobGiver_FightDownedEnemies">
+              <targetAcquireRadius>20</targetAcquireRadius>
+              <targetKeepRadius>30</targetKeepRadius>
+            </li>
+            <li Class="JobGiver_WanderAnywhere" />
+          </subNodes>
+        </li>
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+  
+  <JobDef>
+    <defName>GMT_Job_AttackMeleeDowned</defName>
+    <driverClass>Garthor_More_Traits.GMT_JobDriver_AttackMeleeDowned</driverClass>
+    <reportString>melee attacking TargetA.</reportString>
+    <alwaysShowWeapon>true</alwaysShowWeapon>
+    <casualInterruptible>false</casualInterruptible>
+    <collideWithPawns>true</collideWithPawns>
+  </JobDef>
+  
+  <!-- Copy of Insult InteractionDef, but with no social fight chance -->
+  <InteractionDef ParentName="Insult">
+    <defName>GMT_Interaction_InsultEnemy</defName>
+    <socialFightBaseChance>0</socialFightBaseChance>
+  </InteractionDef>
+</Defs>

@@ -1,0 +1,14 @@
+1.1.0.1:
+  Release
+
+1.1.0.2:
+  Animal Friend -> Animal Whisperer
+  Changed Animal Whisperer description
+  Tweaked trait commonalities
+
+1.1.0.3:
+  Animal Whisperer -> Animal Empathy
+  Fixed error when ground-targeting mortars
+
+1.1.0.4:
+  New trait: Berserker.  Pawns with this trait will go into a berserk rage when attacked, gaining enhanced combat abilities at the expense of being uncontrollable.

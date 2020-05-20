@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+  <TraitDef>
+    <defName>GMT_Animal_Friend</defName>
+    <commonality>0.25</commonality>
+    <degreeDatas>
+      <li>
+       <label>Animal Empathy</label>
+       <description>{PAWN_nameDef} is a friend to animals of all kinds. {PAWN_pronoun} would never harm them, and they would never harm {PAWN_objective}.</description>
+       <disallowedMentalStates>
+         <li>Slaughterer</li>
+       </disallowedMentalStates>
+      </li>
+    </degreeDatas>
+    <requiredWorkTags>
+      <li>Animals</li>
+    </requiredWorkTags>
+    <disabledWorkTypes>
+      <li>Hunting</li>
+    </disabledWorkTypes>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>GMT_Slob</defName>
+    <commonality>0.5</commonality>
+    <degreeDatas>
+      <li>
+       <label>slob</label>
+       <description>{PAWN_nameDef} is a complete slob. {PAWN_pronoun} tracks in dirt, tosses trash everywhere, and refuses to clean up.</description>
+      </li>
+    </degreeDatas>
+    <disabledWorkTypes>
+      <li>Cleaning</li>
+    </disabledWorkTypes>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>GMT_Caravaneer</defName>
+    <commonality>0.25</commonality>
+    <degreeDatas>
+      <li>
+       <label>Caravaneer</label>
+       <description>{PAWN_nameDef} has a natural talent for logistics. Their leadership allows caravans to move 15% faster.</description>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+  
+  <TraitDef>
+    <defName>GMT_Boring</defName>
+    <commonality>0.5</commonality>
+    <degreeDatas>
+      <li>
+       <label>Boring</label>
+       <description>{PAWN_nameDef} justs keeps talking in one long incredibly unbroken sentence moving from topic to topic so that no-one has a chance to interrupt; it is really quite hypnotic.</description>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+  
+  <TraitDef>
+    <defName>GMT_Teacher</defName>
+    <commonality>0.7</commonality>
+    <degreeDatas>
+      <li>
+       <label>Teacher</label>
+       <description>{PAWN_nameDef} loves to help people learn. {PAWN_pronoun} will teach a little something to everybody they talk to.</description>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+  
+  <TraitDef>
+    <defName>GMT_Satan_Spawn</defName>
+    <commonality>0.001</commonality>
+    <degreeDatas>
+      <li>
+       <label>Spawn of Satan</label>
+       <description>{PAWN_nameDef} bears the mark of the Prince of Darkness, the King of Hell, the Father of Lies: Lucifer himself. None know for what reason {PAWN_pronoun} has come to this world, or what dark plan {PAWN_pronoun} aims to enact, only that in {PAWN_possessive} wake, death and destruction follow. Be afraid.</description>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+  
+  <TraitDef>
+    <defName>GMT_Drunken_Master</defName>
+    <commonality>0.4</commonality>
+    <degreeDatas>
+      <li>
+        <label>Drunken Master</label>
+        <description>{PAWN_nameDef} is a master of Zuì Quán: drunken boxing. Or at least, it seems that way when {PAWN_pronoun}'s wasted. The more {PAWN_pronoun} drinks, the better {PAWN_pronoun} fights.</description>
+      </li>
+    </degreeDatas>
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+    <conflictingTraits>
+      <li>DrugDesire</li> <!-- Don't want to pair with Teetotaler but have to exclude the whole spectrum -->
+    </conflictingTraits>
+  </TraitDef>
+  
+  <TraitDef>
+    <defName>GMT_Berserker</defName> <!-- My love for you is like a truck -->
+    <commonality>0.4</commonality>
+    <degreeDatas>
+      <li>
+        <label>Berserker</label>
+        <description>{PAWN_nameDef} has a fury simmering deep within {PAWN_pronoun}. In combat, {PAWN_pronoun} may fly into a berserker rage, becoming an uncontrollable whirlwind of destruction.</description>
+      </li>
+    </degreeDatas>
+    <forcedPassions>
+      <li>Melee</li>
+    </forcedPassions>
+    <requiredWorkTags>
+      <li>Violent</li>
+    </requiredWorkTags>
+    <modExtensions>
+      <li Class="Garthor_More_Traits.GMT_Trait_ModExtension">
+        <appliedHediffs>
+          <li>GMT_Hediff_Berserker_Ire</li>
+        </appliedHediffs>
+      </li>
+    </modExtensions>
+  </TraitDef>
+</Defs>

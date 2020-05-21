@@ -15,7 +15,26 @@ namespace Garthor_More_Traits
 
 	public static class GMT_Animal_Friend_Helper
 	{
-		// Helper functions because we type these a lot
+		/// <summary>
+		/// Returns true if two Things should be friendly due to Animal Empathy: one is an Animal Friend and the other is an Animal (or Insect Hive)
+		/// </summary>
+		/// <param name="t1"></param>
+		/// <param name="t2"></param>
+		/// <returns></returns>
+		internal static bool ShouldBeFriendly(Thing t1, Thing t2)
+		{
+			Pawn p1 = t1 as Pawn;
+			Pawn p2 = t2 as Pawn;
+			if((p1 != null) && isAnimalFriend(p1) && isAnimalOrHive(t2))
+			{
+				return true;
+			}
+			if((p2 != null) && isAnimalFriend(p2) && isAnimalOrHive(t1))
+			{
+				return true;
+			}
+			return false;
+		}
 		internal static bool isAnimalFriend(Pawn p)
 		{
 			return p?.story?.traits?.HasTrait(GMT_DefOf.GMT_Animal_Friend) ?? false;
@@ -81,8 +100,7 @@ namespace Garthor_More_Traits
 	{
 		static bool Prefix(ref bool __result, Pawn predator, Pawn prey)
 		{
-			if (   GMT_Animal_Friend_Helper.isAnimalOrHive(predator) && GMT_Animal_Friend_Helper.isAnimalFriend(prey)
-				|| GMT_Animal_Friend_Helper.isAnimalOrHive(prey) && GMT_Animal_Friend_Helper.isAnimalFriend(predator))
+			if (GMT_Animal_Friend_Helper.ShouldBeFriendly(predator, prey))
 			{
 				__result = false;
 				return false;
@@ -103,9 +121,7 @@ namespace Garthor_More_Traits
 			if (__result)
 			{
 				// If one is an animal, and the other is an animal friend, change the result to false
-				__result = !(   (GMT_Animal_Friend_Helper.isAnimalOrHive(a) && GMT_Animal_Friend_Helper.isAnimalFriend(b as Pawn))
-							 || (GMT_Animal_Friend_Helper.isAnimalOrHive(b) && GMT_Animal_Friend_Helper.isAnimalFriend(a as Pawn))
-							);
+				__result = !GMT_Animal_Friend_Helper.ShouldBeFriendly(a, b);
 			}
 		}
 	}
@@ -121,10 +137,9 @@ namespace Garthor_More_Traits
 	{
 		static bool Prefix(ref Action __result, Pawn pawn, LocalTargetInfo target, out string failStr)
 		{
-			if (   GMT_Animal_Friend_Helper.isAnimalFriend(pawn) && GMT_Animal_Friend_Helper.isAnimalOrHive(target.Thing)
-				|| GMT_Animal_Friend_Helper.isAnimalFriend(target.Pawn) && GMT_Animal_Friend_Helper.isAnimalOrHive(pawn))
+			if (GMT_Animal_Friend_Helper.ShouldBeFriendly(pawn, target.Thing))
 			{
-				failStr = "GMT_CannotHarmAnimals".TranslateSimple();
+				failStr = "GMT_CannotHarmAnimals".Translate();
 				__result = null;
 				return false;
 			}
@@ -144,10 +159,9 @@ namespace Garthor_More_Traits
 	{
 		static bool Prefix(ref Action __result, Pawn pawn, LocalTargetInfo target, out string failStr)
 		{
-			if (   GMT_Animal_Friend_Helper.isAnimalFriend(pawn) && GMT_Animal_Friend_Helper.isAnimalOrHive(target.Thing)
-				|| GMT_Animal_Friend_Helper.isAnimalFriend(target.Pawn) && GMT_Animal_Friend_Helper.isAnimalOrHive(pawn))
+			if (GMT_Animal_Friend_Helper.ShouldBeFriendly(pawn, target.Thing))
 			{
-				failStr = "GMT_CannotHarmAnimals".TranslateSimple();
+				failStr = "GMT_CannotHarmAnimals".Translate();
 				__result = null;
 				return false;
 			}
@@ -170,10 +184,7 @@ namespace Garthor_More_Traits
 	{
 		static bool Prefix(Verb __instance, ref bool __result, LocalTargetInfo target)
 		{
-			// If it's a directly harmful verb, or it is an ability with an effect that would cause a goodwill loss
-			if ( target.Pawn != null && __instance.CasterPawn != null && GMT_Animal_Friend_Helper.isHarmfulVerb(__instance)
-				&& (   GMT_Animal_Friend_Helper.isAnimalOrHive(__instance.CasterPawn) && GMT_Animal_Friend_Helper.isAnimalFriend(target.Pawn)
-				    || GMT_Animal_Friend_Helper.isAnimalOrHive(target.Thing) && GMT_Animal_Friend_Helper.isAnimalFriend(__instance.CasterPawn)))
+			if(GMT_Animal_Friend_Helper.isHarmfulVerb(__instance) && GMT_Animal_Friend_Helper.ShouldBeFriendly(__instance.Caster, target.Thing))
 			{
 				__result = false;
 				return false;
@@ -190,14 +201,11 @@ namespace Garthor_More_Traits
 	{
 		static bool Prefix(bool __result, Pawn pawn, Thing t)
 		{
-			if(GMT_Animal_Friend_Helper.isAnimalFriend(pawn))
+			if (GMT_Animal_Friend_Helper.ShouldBeFriendly(pawn, t))
 			{
-				if(GMT_Animal_Friend_Helper.isAnimalOrHive(t))
-				{
-					__result = false;
-					Verse.AI.JobFailReason.Is("Garthor_CannotHarmAnimals".Translate(), null);
-					return false;
-				}
+				__result = false;
+				Verse.AI.JobFailReason.Is("Garthor_CannotHarmAnimals".Translate(), null);
+				return false;
 			}
 			return true;
 		}
@@ -215,7 +223,7 @@ namespace Garthor_More_Traits
 	{
 		static bool Prefix(Thing __instance, DamageInfo dinfo, float totalDamageDealt)
 		{
-			if (totalDamageDealt > 0.0f && GMT_Animal_Friend_Helper.isAnimalOrHive(__instance) && GMT_Animal_Friend_Helper.isAnimalFriend(dinfo.Instigator as Pawn))
+			if (totalDamageDealt > 0.0f && GMT_Animal_Friend_Helper.ShouldBeFriendly(__instance, dinfo.Instigator))
 			{
 				if (dinfo.Def.defName != "ExecutionCut")
 				{

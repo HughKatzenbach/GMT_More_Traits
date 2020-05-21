@@ -12,3 +12,6 @@
 
 1.1.0.4:
   New trait: Berserker.  Pawns with this trait will go into a berserk rage when attacked, gaining enhanced combat abilities at the expense of being uncontrollable.
+
+1.1.0.5
+  Fixes to Animal Empathy trait

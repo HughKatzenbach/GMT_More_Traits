@@ -52,6 +52,7 @@ namespace Garthor_More_Traits
 		}
 		internal static bool isHarmfulVerb(Verb verb)
 		{
+			/*
 			// If JecsTools is present, and this is a JecsTools ability, return the isViolent property
 			if (Main.modpresent_JecsTools) {
 				AbilityUser.VerbProperties_Ability verbProps = ((verb as AbilityUser.Verb_UseAbility)?.UseAbilityProps ?? null);
@@ -60,6 +61,7 @@ namespace Garthor_More_Traits
 					return verbProps.isViolent;
 				}
 			}
+			*/
 			// Otherwise, we go to our vanilla fallback: it harms health, or it's a cast ability with a negative goodwill impact.
 			return verb.HarmsHealth() || ((verb as Verb_CastAbility)?.ability?.EffectComps?.Exists((CompAbilityEffect e) => { return e.Props.goodwillImpact < 0; }) ?? false);
 		}
@@ -184,7 +186,7 @@ namespace Garthor_More_Traits
 	{
 		static bool Prefix(Verb __instance, ref bool __result, LocalTargetInfo target)
 		{
-			if(GMT_Animal_Friend_Helper.isHarmfulVerb(__instance) && GMT_Animal_Friend_Helper.ShouldBeFriendly(__instance.Caster, target.Thing))
+			if (GMT_Animal_Friend_Helper.isHarmfulVerb(__instance) && GMT_Animal_Friend_Helper.ShouldBeFriendly(__instance.Caster, target.Thing))
 			{
 				__result = false;
 				return false;

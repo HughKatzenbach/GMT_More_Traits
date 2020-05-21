@@ -52,16 +52,12 @@ namespace Garthor_More_Traits
 		}
 		internal static bool isHarmfulVerb(Verb verb)
 		{
-			/*
+			
 			// If JecsTools is present, and this is a JecsTools ability, return the isViolent property
-			if (Main.modpresent_JecsTools) {
-				AbilityUser.VerbProperties_Ability verbProps = ((verb as AbilityUser.Verb_UseAbility)?.UseAbilityProps ?? null);
-				if (verbProps != null)
-				{
-					return verbProps.isViolent;
-				}
+			if(Compatibility.JecsTools.active && Compatibility.JecsTools.isHarmfulVerb(verb, out bool harmful))
+			{
+				return harmful;
 			}
-			*/
 			// Otherwise, we go to our vanilla fallback: it harms health, or it's a cast ability with a negative goodwill impact.
 			return verb.HarmsHealth() || ((verb as Verb_CastAbility)?.ability?.EffectComps?.Exists((CompAbilityEffect e) => { return e.Props.goodwillImpact < 0; }) ?? false);
 		}

@@ -33,6 +33,6 @@ namespace Garthor_More_Traits
 		public static HediffDef GMT_Hediff_Berserker_Rage;
 		public static MentalStateDef GMT_MentalState_Berserking;
 		public static JobDef GMT_Job_AttackMeleeDowned;
-		public static InteractionDef GMT_Interaction_InsultEnemy; // Insult used on enemies that won't start social fights
+		public static InteractionDef GMT_Interaction_InsultEnemy; // Insult that won't start social fights, to be used on enemies
 	}
 }

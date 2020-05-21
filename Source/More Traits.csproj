@@ -65,6 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compatibility\JecsTools.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GMT_DefOf.cs" />
     <Compile Include="Traits\Animal_Friend.cs" />

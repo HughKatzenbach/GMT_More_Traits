@@ -18,11 +18,6 @@ namespace Garthor_More_Traits
 		static Main()
 		{
 			var harmony = new Harmony("Garthor.More_Traits");
-			// Check for presence of the JecsTools mod
-			if (AccessTools.TypeByName("AbilityUser.Verb_UseAbility") != null)
-			{
-				modpresent_JecsTools = true;
-			}
 			harmony.PatchAll();
 		}
 	}

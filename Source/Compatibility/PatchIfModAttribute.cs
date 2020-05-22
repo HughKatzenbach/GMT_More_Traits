@@ -17,8 +17,6 @@ namespace Garthor_More_Traits.Compatibility
 
         public bool IsModLoaded()
         {
-            bool b = Verse.ModLister.AllInstalledMods.Any(x => x.Active && x.SamePackageId(modPackageID));
-            Log.Message($"{modPackageID} present: {b}");
             return ModLister.AllInstalledMods.Any(x => x.Active && x.SamePackageId(modPackageID));
         }
     }

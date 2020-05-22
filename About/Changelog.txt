@@ -1,17 +1,20 @@
-1.1.0.1:
-  Release
+1.1.0.6:
+  Compatibility with Syrchalis' Doormats mod: Slobs will not use doormats.
+
+1.1.0.5:
+  Fixes to Animal Empathy trait
+
+1.1.0.4:
+  New trait: Berserker.  Pawns with this trait will go into a berserk rage when attacked, gaining enhanced combat abilities at the expense of being uncontrollable.
+
+1.1.0.3:
+  Animal Whisperer -> Animal Empathy
+  Fixed error when ground-targeting mortars
 
 1.1.0.2:
   Animal Friend -> Animal Whisperer
   Changed Animal Whisperer description
   Tweaked trait commonalities
 
-1.1.0.3:
-  Animal Whisperer -> Animal Empathy
-  Fixed error when ground-targeting mortars
-
-1.1.0.4:
-  New trait: Berserker.  Pawns with this trait will go into a berserk rage when attacked, gaining enhanced combat abilities at the expense of being uncontrollable.
-
-1.1.0.5
-  Fixes to Animal Empathy trait
+1.1.0.1:
+  Release

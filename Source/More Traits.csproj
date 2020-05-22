@@ -47,6 +47,10 @@
       <HintPath>..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="SyrDoorMats">
+      <HintPath>References\SyrDoormats\SyrDoorMats.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -65,6 +69,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compatibility\PatchIfModAttribute.cs" />
+    <Compile Include="Compatibility\Syr_Doormats.cs" />
     <Compile Include="Compatibility\JecsTools.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GMT_DefOf.cs" />

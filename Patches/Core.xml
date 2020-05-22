@@ -4,6 +4,7 @@
   <Operation Class="PatchOperationSequence">
     <operations>
       <!-- Add Violent to the disablingWorkTags for Shooting, if not present -->
+      <!-- If a disablingWorkTags entry is present, we just don't know what to do tbh -->
       <li Class="PatchOperationSequence">
         <success>Always</success>
         <operations>

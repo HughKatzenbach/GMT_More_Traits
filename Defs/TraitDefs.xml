@@ -102,7 +102,7 @@
     <degreeDatas>
       <li>
         <label>Berserker</label>
-        <description>{PAWN_nameDef} has a fury simmering deep within {PAWN_pronoun}. In combat, {PAWN_pronoun} may fly into a berserker rage, becoming an uncontrollable whirlwind of destruction.</description>
+        <description>{PAWN_nameDef} has a fury simmering deep within {PAWN_objective}. In combat, {PAWN_pronoun} may fly into a berserker rage, becoming an uncontrollable whirlwind of destruction.</description>
       </li>
     </degreeDatas>
     <forcedPassions>

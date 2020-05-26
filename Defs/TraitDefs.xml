@@ -63,7 +63,7 @@
     <degreeDatas>
       <li>
        <label>Teacher</label>
-       <description>{PAWN_nameDef} loves to help people learn. {PAWN_pronoun} will teach a little something to everybody they talk to.</description>
+       <description>{PAWN_nameDef} loves to help people learn. {PAWN_pronoun} will teach a little something to everybody {PAWN_pronoun} talks to.</description>
       </li>
     </degreeDatas>
   </TraitDef>

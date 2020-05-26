@@ -63,6 +63,9 @@ namespace Garthor_More_Traits
 		}
 	}
 
+	/*
+	 * This is no longer necessary as of 1.1.2645: addition of neverDisabledBasedOnWorkTypes tag
+	 * 
 	/// <summary>
 	/// Changes SkillDef.IsDisabled to not consider work types for Shooting and Melee.  This prevents Shooting from showing as disabled for Animal Friends.
 	/// </summary>
@@ -85,6 +88,7 @@ namespace Garthor_More_Traits
 			}
 		}
 	}
+	*/
 
 	/// <summary>
 	/// Prevent predators from selecting an Animal Friend as a target for hunting.

@@ -23,12 +23,9 @@ namespace Garthor_More_Traits
 						where x.IsClass && x.Namespace == "Garthor_More_Traits.Compatibility"
 						select x;
 
-			Log.Message("Looking for compatibility patches");
-
 			// Iterate through types tagged with the PatchIfMod attribute
 			foreach (var t in types)
 			{
-				Log.Message($"Looking at {t}");
 				var attr = t.GetCustomAttribute<Compatibility.PatchIfModAttribute>();
 				if (attr != null && attr.IsModLoaded())
 				{

@@ -229,18 +229,11 @@ namespace Garthor_More_Traits
 			{
 				if (dinfo.Def.defName != "ExecutionCut")
 				{
-					(dinfo.Instigator as Pawn)?.needs?.mood?.thoughts?.memories?.TryGainMemory(GMT_Animal_Friend_Hurt_Animal.defOf, (__instance as Pawn));
+					(dinfo.Instigator as Pawn)?.needs?.mood?.thoughts?.memories?.TryGainMemory(GMT_DefOf.GMT_Animal_Friend_Hurt_Animal, (__instance as Pawn));
 				}
 			}
 			return true;
 		}
-	}
-
-	[DefOf]
-	public static class GMT_Animal_Friend_Hurt_Animal
-	{
-		[DefAlias("GMT_Animal_Friend_Hurt_Animal")]
-		public static ThoughtDef defOf;
 	}
 
 	// TODO: violent (but non-damaging) AOE abilities hitting animals?

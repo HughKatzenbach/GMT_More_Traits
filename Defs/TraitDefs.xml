@@ -41,7 +41,7 @@
     <degreeDatas>
       <li>
        <label>Caravaneer</label>
-       <description>{PAWN_nameDef} has a natural talent for logistics. Their leadership allows caravans to move 15% faster.</description>
+       <description>{PAWN_nameDef} has a natural talent for logistics. {PAWN_possessive} leadership allows caravans to move 15% faster.</description>
       </li>
     </degreeDatas>
   </TraitDef>

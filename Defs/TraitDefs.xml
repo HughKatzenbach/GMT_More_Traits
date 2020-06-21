@@ -119,4 +119,18 @@
       </li>
     </modExtensions>
   </TraitDef>
+  
+  <TraitDef>
+    <defName>GMT_Juggernaut</defName>
+    <commonality>0.4</commonality>
+    <degreeDatas>
+      <li>
+        <label>Juggernaut</label>
+        <description>Whether due to strength, agility, or stupidity, {PAWN_nameDef} cannot be stopped. {PAWN_pronoun} cannot be stunned, and will not be staggered by attacks.</description>
+      </li>
+    </degreeDatas>
+    <conflictingTraits>
+      <li>Wimp</li>
+    </conflictingTraits>
+  </TraitDef>
 </Defs>

@@ -24,6 +24,7 @@ namespace Garthor_More_Traits
 		public static TraitDef GMT_Slob;
 		public static TraitDef GMT_Drunken_Master;
 		public static TraitDef GMT_Berserker;
+		public static TraitDef GMT_Juggernaut;
 
 		public static ThoughtDef GMT_Animal_Friend_Hurt_Animal;
 

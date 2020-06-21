@@ -3,7 +3,7 @@
 <Defs>
   <TraitDef>
     <defName>GMT_Animal_Friend</defName>
-    <commonality>0.25</commonality>
+    <commonality>0.4</commonality>
     <degreeDatas>
       <li>
        <label>Animal Empathy</label>
@@ -23,7 +23,7 @@
 
   <TraitDef>
     <defName>GMT_Slob</defName>
-    <commonality>0.5</commonality>
+    <commonality>0.7</commonality>
     <degreeDatas>
       <li>
        <label>slob</label>
@@ -37,7 +37,7 @@
 
   <TraitDef>
     <defName>GMT_Caravaneer</defName>
-    <commonality>0.25</commonality>
+    <commonality>0.4</commonality>
     <degreeDatas>
       <li>
        <label>Caravaneer</label>
@@ -48,7 +48,7 @@
   
   <TraitDef>
     <defName>GMT_Boring</defName>
-    <commonality>0.5</commonality>
+    <commonality>0.7</commonality>
     <degreeDatas>
       <li>
        <label>Boring</label>
@@ -59,7 +59,7 @@
   
   <TraitDef>
     <defName>GMT_Teacher</defName>
-    <commonality>0.7</commonality>
+    <commonality>0.8</commonality>
     <degreeDatas>
       <li>
        <label>Teacher</label>
@@ -81,7 +81,7 @@
   
   <TraitDef>
     <defName>GMT_Drunken_Master</defName>
-    <commonality>0.4</commonality>
+    <commonality>0.5</commonality>
     <degreeDatas>
       <li>
         <label>Drunken Master</label>
@@ -98,7 +98,7 @@
   
   <TraitDef>
     <defName>GMT_Berserker</defName> <!-- My love for you is like a truck -->
-    <commonality>0.4</commonality>
+    <commonality>0.5</commonality>
     <degreeDatas>
       <li>
         <label>Berserker</label>
@@ -122,7 +122,7 @@
   
   <TraitDef>
     <defName>GMT_Juggernaut</defName>
-    <commonality>0.4</commonality>
+    <commonality>0.5</commonality>
     <degreeDatas>
       <li>
         <label>Juggernaut</label>

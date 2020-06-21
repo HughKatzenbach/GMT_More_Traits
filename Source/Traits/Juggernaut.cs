@@ -18,8 +18,8 @@ namespace Garthor_More_Traits.Traits
     /// <summary>
     /// Prefix Pawn_StanceTracker.StaggerFor() to stagger for 0 ticks if the associated pawn has the Juggernaut trait
     /// </summary>
-    [HarmonyPatch(typeof(Verse.Pawn_StanceTracker), "StaggerFor")]
-    [HarmonyPatch(new Type[] { typeof(Pawn) })]
+    [HarmonyPatch(typeof(Pawn_StanceTracker), "StaggerFor")]
+    [HarmonyPatch(new Type[] { typeof(int) })]
     public static class Pawn_StanceTracker_StaggerFor_Patch
     {
         static void Prefix(Pawn_StanceTracker __instance, ref int ticks)
@@ -35,8 +35,8 @@ namespace Garthor_More_Traits.Traits
     /// <summary>
     /// Prefix StunHandler.StunFor() to stun for 0 ticks if the associated pawn has the Juggernaut trait
     /// </summary>
-    [HarmonyPatch(typeof(Pawn_StanceTracker), "StunFor")]
-    [HarmonyPatch(new Type[] { typeof(Pawn) })]
+    [HarmonyPatch(typeof(StunHandler), "StunFor")]
+    [HarmonyPatch(new Type[] { typeof(int), typeof(Thing), typeof(bool) })]
     public static class StunHandler_StunFor_Patch
     {
         static void Prefix(StunHandler __instance, ref int ticks, ref bool addBattleLog)

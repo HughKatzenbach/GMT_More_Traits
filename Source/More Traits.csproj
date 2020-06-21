@@ -79,6 +79,7 @@
     <Compile Include="Traits\Caravaneer.cs" />
     <Compile Include="Traits\Berserker.cs" />
     <Compile Include="Traits\Drunken_Master.cs" />
+    <Compile Include="Traits\Juggernaut.cs" />
     <Compile Include="Traits\Satan_Spawn.cs" />
     <Compile Include="Traits\Teacher.cs" />
     <Compile Include="Traits\Slob.cs" />

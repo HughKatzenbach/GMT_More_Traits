@@ -1,3 +1,7 @@
+1.1.0.7:
+  New trait: Juggernaut.  Cannot be stunned or staggered.
+  Traits are slightly more common.
+
 1.1.0.6:
   Compatibility with Syrchalis' Doormats mod: Slobs will not use doormats.
 

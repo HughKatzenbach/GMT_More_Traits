@@ -3,7 +3,7 @@
 <Defs>
   <TraitDef>
     <defName>GMT_Animal_Friend</defName>
-    <commonality>0.25</commonality>
+    <commonality>0.4</commonality>
     <degreeDatas>
       <li>
        <label>Animal Empathy</label>
@@ -23,7 +23,7 @@
 
   <TraitDef>
     <defName>GMT_Slob</defName>
-    <commonality>0.5</commonality>
+    <commonality>0.7</commonality>
     <degreeDatas>
       <li>
        <label>slob</label>
@@ -37,18 +37,18 @@
 
   <TraitDef>
     <defName>GMT_Caravaneer</defName>
-    <commonality>0.25</commonality>
+    <commonality>0.4</commonality>
     <degreeDatas>
       <li>
        <label>Caravaneer</label>
-       <description>{PAWN_nameDef} has a natural talent for logistics. Their leadership allows caravans to move 15% faster.</description>
+       <description>{PAWN_nameDef} has a natural talent for logistics. {PAWN_possessive} leadership allows caravans to move 15% faster.</description>
       </li>
     </degreeDatas>
   </TraitDef>
   
   <TraitDef>
     <defName>GMT_Boring</defName>
-    <commonality>0.5</commonality>
+    <commonality>0.7</commonality>
     <degreeDatas>
       <li>
        <label>Boring</label>
@@ -59,11 +59,11 @@
   
   <TraitDef>
     <defName>GMT_Teacher</defName>
-    <commonality>0.7</commonality>
+    <commonality>0.8</commonality>
     <degreeDatas>
       <li>
        <label>Teacher</label>
-       <description>{PAWN_nameDef} loves to help people learn. {PAWN_pronoun} will teach a little something to everybody they talk to.</description>
+       <description>{PAWN_nameDef} loves to help people learn. {PAWN_pronoun} will teach a little something to everybody {PAWN_pronoun} talks to.</description>
       </li>
     </degreeDatas>
   </TraitDef>
@@ -81,7 +81,7 @@
   
   <TraitDef>
     <defName>GMT_Drunken_Master</defName>
-    <commonality>0.4</commonality>
+    <commonality>0.5</commonality>
     <degreeDatas>
       <li>
         <label>Drunken Master</label>
@@ -98,11 +98,11 @@
   
   <TraitDef>
     <defName>GMT_Berserker</defName> <!-- My love for you is like a truck -->
-    <commonality>0.4</commonality>
+    <commonality>0.5</commonality>
     <degreeDatas>
       <li>
         <label>Berserker</label>
-        <description>{PAWN_nameDef} has a fury simmering deep within {PAWN_pronoun}. In combat, {PAWN_pronoun} may fly into a berserker rage, becoming an uncontrollable whirlwind of destruction.</description>
+        <description>{PAWN_nameDef} has a fury simmering deep within {PAWN_objective}. In combat, {PAWN_pronoun} may fly into a berserker rage, becoming an uncontrollable whirlwind of destruction.</description>
       </li>
     </degreeDatas>
     <forcedPassions>
@@ -118,5 +118,19 @@
         </appliedHediffs>
       </li>
     </modExtensions>
+  </TraitDef>
+  
+  <TraitDef>
+    <defName>GMT_Juggernaut</defName>
+    <commonality>0.5</commonality>
+    <degreeDatas>
+      <li>
+        <label>Juggernaut</label>
+        <description>Whether due to strength, agility, or stupidity, {PAWN_nameDef} cannot be stopped. {PAWN_pronoun} cannot be stunned, and will not be staggered by attacks.</description>
+      </li>
+    </degreeDatas>
+    <conflictingTraits>
+      <li>Wimp</li>
+    </conflictingTraits>
   </TraitDef>
 </Defs>

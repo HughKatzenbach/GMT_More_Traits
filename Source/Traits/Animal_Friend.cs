@@ -63,6 +63,9 @@ namespace Garthor_More_Traits
 		}
 	}
 
+	/*
+	 * This is no longer necessary as of 1.1.2645: addition of neverDisabledBasedOnWorkTypes tag
+	 * 
 	/// <summary>
 	/// Changes SkillDef.IsDisabled to not consider work types for Shooting and Melee.  This prevents Shooting from showing as disabled for Animal Friends.
 	/// </summary>
@@ -85,6 +88,7 @@ namespace Garthor_More_Traits
 			}
 		}
 	}
+	*/
 
 	/// <summary>
 	/// Prevent predators from selecting an Animal Friend as a target for hunting.
@@ -225,18 +229,11 @@ namespace Garthor_More_Traits
 			{
 				if (dinfo.Def.defName != "ExecutionCut")
 				{
-					(dinfo.Instigator as Pawn)?.needs?.mood?.thoughts?.memories?.TryGainMemory(GMT_Animal_Friend_Hurt_Animal.defOf, (__instance as Pawn));
+					(dinfo.Instigator as Pawn)?.needs?.mood?.thoughts?.memories?.TryGainMemory(GMT_DefOf.GMT_Animal_Friend_Hurt_Animal, (__instance as Pawn));
 				}
 			}
 			return true;
 		}
-	}
-
-	[DefOf]
-	public static class GMT_Animal_Friend_Hurt_Animal
-	{
-		[DefAlias("GMT_Animal_Friend_Hurt_Animal")]
-		public static ThoughtDef defOf;
 	}
 
 	// TODO: violent (but non-damaging) AOE abilities hitting animals?

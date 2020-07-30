@@ -54,7 +54,6 @@ namespace Garthor_More_Traits
 				if (this.Severity == this.def.minSeverity)
 				{
 					Exit_Rage();
-					this.visible = false;
 				}
 			}
 		}

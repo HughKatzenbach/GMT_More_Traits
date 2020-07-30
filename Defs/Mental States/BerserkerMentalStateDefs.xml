@@ -59,7 +59,7 @@
     <isBad>false</isBad>
     <stages>
       <li>
-        <label>BERSERK</label>
+        <!--<label>BERSERK</label>-->
         <painFactor>0.5</painFactor>
         <capMods>
           <li>

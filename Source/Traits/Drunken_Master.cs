@@ -97,19 +97,17 @@ namespace Garthor_More_Traits
     /// Postfixes FindCombatEnhancingDrug to take a beer if the pawn is a Drunken Master
     /// 1.1 Compatibility patch
     /// </summary>
-    //[HarmonyPatch(typeof(JobGiver_TakeCombatEnhancingDrug), "FindCombatEnhancingDrug")]
-    [HarmonyPatch]
+    [HarmonyPatch(typeof(JobGiver_TakeCombatEnhancingDrug), "FindCombatEnhancingDrug")]
     public class JobGiver_TakeCombatEnhancingDrug_FindCombatEnhancingDrug_Patch
     {
-        public MethodInfo TargetMethod()
+        static bool Prepare()
         {
-            // Target this method if it isn't obsolete.  Otherwise, we will be targeting another method in a different patch
-            MethodInfo target = typeof(JobGiver_TakeCombatEnhancingDrug).GetMethod("FindCombatEnhancingDrug");
+            MethodInfo target = typeof(JobGiver_TakeCombatEnhancingDrug).GetMethod("FindCombatEnhancingDrug", BindingFlags.NonPublic | BindingFlags.Instance);
             if (target == null || target.HasAttribute<ObsoleteAttribute>())
             {
-                return null;
+                return false;
             }
-            return target;
+            return true;
         }
         static void Postfix(ref Thing __result, Pawn pawn)
         {
@@ -131,6 +129,7 @@ namespace Garthor_More_Traits
                         // Only count this as a drug if it won't down the pawn
                         if (!pawn.health.WouldBeDownedAfterAddingHediff(hediff))
                         {
+                            Log.Message("result");
                             __result = thing;
                             break;
                         }
@@ -145,18 +144,17 @@ namespace Garthor_More_Traits
     /// Used for 1.2 onward
     /// </summary>
     // TODO: it may be preferable to patch GetCombatEnhancingDrugs instead, but that's more effort.
-    [HarmonyPatch]
+    [HarmonyPatch(typeof(Pawn_InventoryTracker), "FindCombatEnhancingDrug")]
     public class Pawn_InventoryTracker_FindCombatEnhancingDrug_Patch
     {
-        public MethodInfo TargetMethod()
+        static bool Prepare()
         {
-            // The target method not exist in old versions, so we be careful about patching it
-            MethodInfo target = typeof(Pawn_InventoryTracker).GetMethod("FindCombatEnhancingDrug");
-            if (target == null)
+            MethodInfo target = typeof(Pawn_InventoryTracker).GetMethod("FindCombatEnhancingDrug", BindingFlags.Public | BindingFlags.Instance);
+            if (target == null || target.HasAttribute<ObsoleteAttribute>())
             {
-                return null;
+                return false;
             }
-            return target;
+            return true;
         }
         static void Postfix(Pawn_InventoryTracker __instance, ref Thing __result)
         {

@@ -41,12 +41,12 @@ namespace Garthor_More_Traits.Traits
     [HarmonyPatch]
     public class StunHandler_StunFor_Patch
     {
-        public MethodBase TargetMethod()
+        static MethodBase TargetMethod()
         {
             // Return the _NewTmp method if it exists, otherwise StunFor (for old versions, or new ones once the NewTmp is removed)
-            MethodInfo newTmp = typeof(StunHandler).GetMethod("StunFor_NewTmp");
+            MethodInfo newTmp = typeof(StunHandler).GetMethod("StunFor_NewTmp", BindingFlags.Public | BindingFlags.Instance);
             if (newTmp != null) return newTmp;
-            else return typeof(StunHandler).GetMethod("StunFor");
+            else return typeof(StunHandler).GetMethod("StunFor", BindingFlags.Public | BindingFlags.Instance);
         }
         static void Prefix(StunHandler __instance, ref int ticks, ref bool addBattleLog)
         {

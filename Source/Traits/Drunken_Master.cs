@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -94,10 +95,22 @@ namespace Garthor_More_Traits
 
     /// <summary>
     /// Postfixes FindCombatEnhancingDrug to take a beer if the pawn is a Drunken Master
+    /// 1.1 Compatibility patch
     /// </summary>
-    [HarmonyPatch(typeof(JobGiver_TakeCombatEnhancingDrug), "FindCombatEnhancingDrug")]
-    public static class JobGiver_TakeCombatEnhancingDrug_FindCombatEnhancingDrug_Patch
+    //[HarmonyPatch(typeof(JobGiver_TakeCombatEnhancingDrug), "FindCombatEnhancingDrug")]
+    [HarmonyPatch]
+    public class JobGiver_TakeCombatEnhancingDrug_FindCombatEnhancingDrug_Patch
     {
+        public MethodInfo TargetMethod()
+        {
+            // Target this method if it isn't obsolete.  Otherwise, we will be targeting another method in a different patch
+            MethodInfo target = typeof(JobGiver_TakeCombatEnhancingDrug).GetMethod("FindCombatEnhancingDrug");
+            if (target == null || target.HasAttribute<ObsoleteAttribute>())
+            {
+                return null;
+            }
+            return target;
+        }
         static void Postfix(ref Thing __result, Pawn pawn)
         {
             if (pawn?.story?.traits?.HasTrait(GMT_DefOf.GMT_Drunken_Master) ?? false)
@@ -105,6 +118,54 @@ namespace Garthor_More_Traits
                 for (int i = 0; i < pawn.inventory.innerContainer.Count; i++)
                 {
                     Thing thing = pawn.inventory.innerContainer[i];
+                    CompDrug compDrug = thing.TryGetComp<CompDrug>();
+                    if (compDrug != null && compDrug.Props.chemical == ChemicalDefOf.Alcohol)
+                    {
+                        var doer = thing.def.ingestible.outcomeDoers.Find(
+                                        (IngestionOutcomeDoer x) => ((x as IngestionOutcomeDoer_GiveHediff)?.hediffDef ?? null) == HediffDefOf.AlcoholHigh
+                                    ) as IngestionOutcomeDoer_GiveHediff;
+                        if (doer == null) continue;
+
+                        Hediff hediff = HediffMaker.MakeHediff(doer.hediffDef, pawn, null);
+                        hediff.Severity = doer.severity;
+                        // Only count this as a drug if it won't down the pawn
+                        if (!pawn.health.WouldBeDownedAfterAddingHediff(hediff))
+                        {
+                            __result = thing;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Postfixes FindCombatEnhancingDrug to take a beer if the pawn is a Drunken Master
+    /// Used for 1.2 onward
+    /// </summary>
+    // TODO: it may be preferable to patch GetCombatEnhancingDrugs instead, but that's more effort.
+    [HarmonyPatch]
+    public class Pawn_InventoryTracker_FindCombatEnhancingDrug_Patch
+    {
+        public MethodInfo TargetMethod()
+        {
+            // The target method not exist in old versions, so we be careful about patching it
+            MethodInfo target = typeof(Pawn_InventoryTracker).GetMethod("FindCombatEnhancingDrug");
+            if (target == null)
+            {
+                return null;
+            }
+            return target;
+        }
+        static void Postfix(Pawn_InventoryTracker __instance, ref Thing __result)
+        {
+            Pawn pawn = __instance.pawn;
+            if (pawn?.story?.traits?.HasTrait(GMT_DefOf.GMT_Drunken_Master) ?? false)
+            {
+                for (int i = 0; i < __instance.innerContainer.Count; i++)
+                {
+                    Thing thing = __instance.innerContainer[i];
                     CompDrug compDrug = thing.TryGetComp<CompDrug>();
                     if (compDrug != null && compDrug.Props.chemical == ChemicalDefOf.Alcohol)
                     {

@@ -1,3 +1,6 @@
+1.1.0.8:
+  Compatibility for 1.2
+
 1.1.0.7:
   New trait: Juggernaut.  Cannot be stunned or staggered.
   Traits are slightly more common.
